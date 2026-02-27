@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRIV Exclusive Birthday Experience</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at center, #050816 0%, #000 100%);
+  overflow: hidden;
+  color: white;
+}
+
+/* GALAXY BACKGROUND */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  animation: moveStars 150s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes moveStars {
+  from {background-position: 0 0;}
+  to {background-position: 10000px 5000px;}
+}
+
+/* INTRO SCREEN */
+.intro {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+  transition: 1.5s ease;
+}
+
+.intro h1 {
+  font-size: 32px;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-align: center;
+  background: linear-gradient(45deg, gold, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.start-btn {
+  padding: 15px 40px;
+  border-radius: 40px;
+  border: none;
+  background: linear-gradient(45deg, gold, orange);
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 0 20px gold;
+  transition: 0.3s;
+}
+
+.start-btn:hover {
+  transform: scale(1.1);
+}
+
+/* CARD */
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 90%;
+  max-width: 700px;
+  padding: 50px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
+  text-align: center;
+  transition: 1.2s ease;
+  box-shadow: 0 0 60px rgba(255,215,0,0.4);
+}
+
+.card.show {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.card h1 {
+  font-size: 30px;
+  color: gold;
+}
+
+.card h2 {
+  margin-top: 10px;
+  font-weight: normal;
+}
+
+.card p {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* ROCKET */
+.rocket {
+  position: absolute;
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 45px;
+}
+
+.rocket.fly {
+  animation: fly 6s ease forwards;
+}
+
+@keyframes fly {
+  0% { bottom: -120px; opacity: 1; }
+  100% { bottom: 130%; transform: translateX(-50%) rotate(25deg); opacity: 0; }
+}
+
+/* FIREWORK */
+.firework {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: gold;
+  border-radius: 50%;
+  animation: explode 1.2s ease-out forwards;
+}
+
+@keyframes explode {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(30); opacity: 0; }
+}
+
+/* CEO */
+.ceo {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="intro" id="intro">
+  <h1>✨ TRIV Presents ✨<br>Exclusive Birthday Experience</h1>
+  <button class="start-btn" onclick="start()">ENTER EXPERIENCE 🚀</button>
+</div>
+
+<div class="card" id="card">
+  <h1>🎉 Selamat Ulang Tahun 🎉</h1>
+  <h2>Evan Satya Mahatma</h2>
+  <p>
+    Terima kasih atas kepercayaan dan perjalanan luar biasa bersama TRIV.
+    Semoga tahun ini membawa pencapaian spektakuler,
+    pertumbuhan tanpa batas, dan kesuksesan yang semakin tinggi.
+  </p>
+  <p><b>🚀 To The Moon — Bersama TRIV 🚀</b></p>
+</div>
+
+<div class="rocket" id="rocket">🚀</div>
+
+<div class="ceo">
+  <b>Gabriel Rey</b><br>
+  CEO & Founder Of TRIV
+</div>
+
+<audio controls autoplay loop>
+  <source src="https://ebansatya-jpg.github.io/musik-web/lv_0_20260227175.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function start() {
+  let intro = document.getElementById("intro");
+  intro.style.opacity = "0";
+  setTimeout(() => intro.style.display = "none", 1500);
+
+  let music = document.getElementById("music");
+  music.volume = 0;
+  music.play().catch(e => console.log("Autoplay blocked"));
+
+  // Smooth fade-in music
+  let fade = setInterval(() => {
+    if (music.volume < 0.8) {
+      music.volume += 0.05;
+    } else {
+      clearInterval(fade);
+    }
+  }, 200);
+
+  document.getElementById("card").classList.add("show");
+  document.getElementById("rocket").classList.add("fly");
+
+  launchFireworks();
+}
+
+function launchFireworks() {
+  setInterval(() => {
+    let fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random() * window.innerWidth + "px";
+    fw.style.top = Math.random() * window.innerHeight + "px";
+    document.body.appendChild(fw);
+    setTimeout(() => fw.remove(), 1200);
+  }, 400);
+}
+</script>
+
+</body>
+                                        </html>
+                                        
